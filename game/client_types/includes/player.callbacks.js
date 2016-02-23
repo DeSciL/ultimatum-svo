@@ -56,7 +56,7 @@ function init() {
 
     // Add event listeners valid for the whole game.
 
-    node.on('BID_DONE', function(offer, offer2, to, timeup) {
+    node.on('BID_DONE', function(offer1, offer2, to, timeup) {
         var root, time;
 
         // Time to make a bid.
@@ -70,24 +70,22 @@ function init() {
         node.game.timer.startWaiting({milliseconds: 30000});
 
         W.getElementById('submitOffer').disabled = 'disabled';
-
         
-        // offer AND offer2 NEED TO BE SAVED FOR THE NEXT STEP (feedback callback function)
-        
-        node.game.lastOffer1 = offer;
+        //save choices for feedback step
+        node.game.lastOffer1 = offer1;
         node.game.lastOffer2 = offer2;
         
         // Notify the other player.
-        node.say('OFFER', to, {offer: offer, offer2: offer2});
+        node.say('OFFER', to, {offer1: offer1, offer2: offer2});
 
         root = W.getElementById('container');
         // Leave a space.
-        W.writeln(' Choice Allocation 1: ' +  offer + '. Choice Allocation 2: ' + offer2 +
+        W.writeln(' Choice Allocation 1: ' +  offer1 + '. Choice Allocation 2: ' + offer2 +
                   '. Waiting for the respondent... ', root);
                   
         // Notify the server.
         node.done({
-            offer: offer,
+            offer1: offer1,
             offer2: offer2,
             time: time,
             timeup: timeup,
@@ -389,7 +387,7 @@ function ultimatum() {
                     var posname = 'pos' + i;
                     var position = W.getElementById(posname);
                     if (position.checked) {
-                        var offer = position.value;
+                        var offer1 = position.value;
                         break;
                     }
                 }
@@ -409,7 +407,7 @@ function ultimatum() {
                 // MISSING: CHECK TO SEE IF PLAYER HAS ACTUALLY CHOSEN ALLOCATION
                 
                 //node.emit('BID_DONE', parseInt(offer.value, 10), parseInt(offer2.value, 10), other);
-                node.emit('BID_DONE', offer, offer2, other);
+                node.emit('BID_DONE', offer1, offer2, other);
             };
 
             root = W.getElementById('container');
@@ -553,11 +551,11 @@ function feedback() {
             
             offered1 = W.getElementById('offered1');
             theofferSpan1 = W.getElementById('theoffer1');
-            theofferSpan1.innerHTML = msg.data.offer;
+            theofferSpan1.innerHTML = msg.data.otherOffer1;
                
             offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
-            theofferSpan2.innerHTML = msg.data.offer2;
+            theofferSpan2.innerHTML = msg.data.otherOffer2;
      
 
             root = W.getElementById('container');

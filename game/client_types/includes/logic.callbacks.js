@@ -231,9 +231,10 @@ function feedback() {
         var other = item.other;
        
         var otherOfferItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-        var otherOffer =  otherOfferItem.offer;
+        var otherOffer1 =  otherOfferItem.offer1;
+        var otherOffer2 =  otherOfferItem.offer2;
 
-        node.say('OTHER_OFFER', item.player,  otherOffer);
+        node.say('OTHER_OFFER', item.player,  otherOffer1, otherOffer2);
     });   
 }
 
