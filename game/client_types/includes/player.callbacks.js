@@ -528,8 +528,8 @@ function feedback() {
 
 
         node.on.data('OTHER_OFFER', function(msg) {
-        //node.on.data('OFFER', function(msg) {
-            var theofferSpan, theofferSpan2, offered, offered2;
+        
+            var chosenSpan1, chosenSpan2, chosen1, chosen2, theofferSpan1, theofferSpan2, offered1, offered2;
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
@@ -543,24 +543,28 @@ function feedback() {
             node.game.timer.startTiming(options);
                         
             
-            offered = W.getElementById('offered');
-            theofferSpan = W.getElementById('theoffer');
-            //theofferSpan.innerHTML = msg.data.offer;
-            theofferSpan.innerHTML = node.game.lastOffer1;
+            chosen1 = W.getElementById('chosen1');
+            chosenSpan1 = W.getElementById('chosenvalue1');
+            chosenSpan1.innerHTML = node.game.lastOffer1;
+               
+            chosen2 = W.getElementById('chosen2');
+            chosenSpan2 = W.getElementById('chosenvalue2');
+            chosenSpan2.innerHTML = node.game.lastOffer2;
+            
+            offered1 = W.getElementById('offered1');
+            theofferSpan1 = W.getElementById('theoffer1');
+            theofferSpan1.innerHTML = msg.data.offer;
                
             offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
-            //theofferSpan2.innerHTML = msg.data.offer2;
-            theofferSpan2.innerHTML = node.game.lastOffer2;
-            
-
-           
+            theofferSpan2.innerHTML = msg.data.offer2;
+     
 
             root = W.getElementById('container');
 
             node.timer.setTimestamp('bidder_loaded');
 
-        //});
+        
         });
         
         b = W.getElementById('continue');

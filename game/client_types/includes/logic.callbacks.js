@@ -221,6 +221,22 @@ function init() {
     console.log('init');
 }
 
+function feedback() {
+    var previousStage; 
+    previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
+    
+    node.game.memory.stage[previousStage].each(function(item) {
+
+        var other = item.other;
+       
+        var otherOfferItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
+        var otherOffer =  otherOfferItem.offer;
+
+        node.say('OTHER_OFFER', item.player,  otherOffer);
+    });   
+}
+
+
 function gameover() {
     console.log('************** GAMEOVER ' + gameRoom.name + ' ****************');
 
