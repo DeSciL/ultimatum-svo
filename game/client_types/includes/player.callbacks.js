@@ -90,7 +90,8 @@ function init() {
             offer: offer,
             offer2: offer2,
             time: time,
-            timeup: timeup
+            timeup: timeup,
+            other: node.game.other
         });
     });
 
@@ -320,6 +321,7 @@ function ultimatum() {
     node.on.data('BIDDER', function(msg) {
         console.log('RECEIVED BIDDER!');
         other = msg.data.other;
+        node.game.other = msg.data.other;
         //node.set({role: 'BIDDER'});
 
         //////////////////////////////////////////////
@@ -525,7 +527,7 @@ function feedback() {
         node.game.offerDone = false;
 
 
-        
+        node.on.data('OTHER_OFFER', function(msg) {
         //node.on.data('OFFER', function(msg) {
             var theofferSpan, theofferSpan2, offered, offered2;
             //console.log('CHOICES DONE!');
@@ -559,6 +561,7 @@ function feedback() {
             node.timer.setTimestamp('bidder_loaded');
 
         //});
+        });
         
         b = W.getElementById('continue');
 
