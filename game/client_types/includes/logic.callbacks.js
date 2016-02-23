@@ -234,7 +234,7 @@ function feedback() {
         var otherOffer1 =  otherOfferItem.offer1;
         var otherOffer2 =  otherOfferItem.offer2;
 
-        node.say('OTHER_OFFER', item.player,  otherOffer1, otherOffer2);
+        node.say('OTHER_OFFER', item.player,  {offer1: otherOffer1, offer2: otherOffer2});
     });   
 }
 

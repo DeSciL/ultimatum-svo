@@ -551,11 +551,11 @@ function feedback() {
             
             offered1 = W.getElementById('offered1');
             theofferSpan1 = W.getElementById('theoffer1');
-            theofferSpan1.innerHTML = msg.data.otherOffer1;
+            theofferSpan1.innerHTML = msg.data.offer1;
                
             offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
-            theofferSpan2.innerHTML = msg.data.otherOffer2;
+            theofferSpan2.innerHTML = msg.data.offer2;
      
 
             root = W.getElementById('container');
