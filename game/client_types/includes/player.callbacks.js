@@ -72,8 +72,10 @@ function init() {
         W.getElementById('submitOffer').disabled = 'disabled';
 
         
-        // PROBLEM: node.say ONLY WORKS FOR THIS CURRENT STEP
         // offer AND offer2 NEED TO BE SAVED FOR THE NEXT STEP (feedback callback function)
+        
+        node.game.lastOffer1 = offer;
+        node.game.lastOffer2 = offer2;
         
         // Notify the other player.
         node.say('OFFER', to, {offer: offer, offer2: offer2});
@@ -524,10 +526,10 @@ function feedback() {
 
 
         
-        node.on.data('OFFER', function(msg) {
+        //node.on.data('OFFER', function(msg) {
             var theofferSpan, theofferSpan2, offered, offered2;
-            console.log('CHOICES DONE!');
-            other = msg.data.other;
+            //console.log('CHOICES DONE!');
+            //other = msg.data.other;
             //node.set({role: 'BIDDER'});
             
             
@@ -537,17 +539,17 @@ function feedback() {
                     }
             };
             node.game.timer.startTiming(options);
-            
+                        
             
             offered = W.getElementById('offered');
             theofferSpan = W.getElementById('theoffer');
-            theofferSpan.innerHTML = msg.data.offer;
-            offered.style.display = '';
+            //theofferSpan.innerHTML = msg.data.offer;
+            theofferSpan.innerHTML = node.game.lastOffer1;
                
             offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
-            theofferSpan2.innerHTML = msg.data.offer2;
-            offered2.style.display = '';
+            //theofferSpan2.innerHTML = msg.data.offer2;
+            theofferSpan2.innerHTML = node.game.lastOffer2;
             
 
            
@@ -556,7 +558,7 @@ function feedback() {
 
             node.timer.setTimestamp('bidder_loaded');
 
-        });
+        //});
         
         b = W.getElementById('continue');
 

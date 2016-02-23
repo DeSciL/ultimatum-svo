@@ -1,0 +1,22 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container', style='font-size: 20px')
+        h2=feedback
+        h3=choices
+        p=payoff
+        
+        div(id='offered')
+            =youReceivedAnOffer1
+            span(id='theoffer')
+            |.</br>
+            
+
+        div(id='offered2')
+            =youReceivedAnOffer2
+            span(id='theoffer2')
+            |.</br>
+        
+        
+        input(type='button', value=submit, name='continue', id='continue', class='btn')
+        br
