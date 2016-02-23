@@ -77,7 +77,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('feedback', {
         cb: function() {
             this.node.log('Feedback');
-            cbs.doMatch();
+            cbs.feedback();
         }
     });
 

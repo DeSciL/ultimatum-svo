@@ -19,6 +19,7 @@ module.exports = {
     gameover: gameover,
     doMatch: doMatch,
     endgame: endgame,
+    feedback: feedback,
     notEnoughPlayers: notEnoughPlayers
 };
 
