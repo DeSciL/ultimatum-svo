@@ -81,6 +81,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
+    stager.extendStep('totalpayoff', {
+        cb: function() {
+            this.node.log('Total Payoffs');
+            cbs.totalpayoff();
+        }
+        //minPlayers: undefined,
+        //steprule: stepRules.SOLO
+    });
+
     stager.extendStep('endgame', {
         cb: cbs.endgame,
         minPlayers: undefined,

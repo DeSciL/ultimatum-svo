@@ -15,6 +15,7 @@ module.exports = function(stager, settings) {
         .next('quiz')
         .repeat('ultimatum', settings.REPEAT)
         .next('questionnaire')
+        .next('totalpayoff')
         .next('endgame')
         .gameover();
 

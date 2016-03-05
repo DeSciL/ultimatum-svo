@@ -161,12 +161,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('feedback', {
         cb: cbs.feedback,
         minPlayers: MIN_PLAYERS,
-        // `syncOnLoaded` forces the clients to wait for all the others to be
-        // fully loaded before releasing the control of the screen to the
-        // players.  This options introduces a little overhead in
-        // communications and delay in the execution of a stage. It is probably
-        // not necessary in local networks, and it is FALSE by default.
-        // syncOnLoaded: true
+    });
+    
+    stager.extendStep('totalpayoff', {
+        cb: cbs.totalpayoff
     });
 
     stager.extendStep('endgame', {

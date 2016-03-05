@@ -14,6 +14,7 @@ module.exports = {
     quiz: quiz,
     ultimatum: ultimatum,
     feedback: feedback,
+    totalpayoff: totalpayoff,
     postgame: postgame,
     endgame: endgame,
     clearFrame: clearFrame,
@@ -512,9 +513,7 @@ function ultimatum() {
 }
 
 function feedback() {
-    var that = this;
-
-    var root, b, options, other;
+    var root, b, options;
 
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL',
                                      'COUNT_UP_ROUNDS_TO_TOTAL']);
@@ -527,7 +526,7 @@ function feedback() {
 
         node.on.data('OTHER_OFFER', function(msg) {
         
-            var chosenSpan1, chosenSpan2, chosen1, chosen2, theofferSpan1, theofferSpan2, offered1, offered2;
+            var chosenSpan1, chosenSpan2, chosen1, chosen2, theofferSpan1, theofferSpan2, offered1, offered2, theofferSpan3, offered3;
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
@@ -541,23 +540,22 @@ function feedback() {
             node.game.timer.startTiming(options);
                         
             
-            chosen1 = W.getElementById('chosen1');
+            //chosen1 = W.getElementById('chosen1');
             chosenSpan1 = W.getElementById('chosenvalue1');
             chosenSpan1.innerHTML = node.game.lastOffer1;
                
-            chosen2 = W.getElementById('chosen2');
+            //chosen2 = W.getElementById('chosen2');
             chosenSpan2 = W.getElementById('chosenvalue2');
             chosenSpan2.innerHTML = node.game.lastOffer2;
             
-            offered1 = W.getElementById('offered1');
+            //offered1 = W.getElementById('offered1');
             theofferSpan1 = W.getElementById('theoffer1');
             theofferSpan1.innerHTML = msg.data.offer1;
                
-            offered2 = W.getElementById('offered2');
+            //offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
             theofferSpan2.innerHTML = msg.data.offer2;
-     
-
+            
             root = W.getElementById('container');
 
             node.timer.setTimestamp('bidder_loaded');
@@ -575,6 +573,42 @@ function feedback() {
 
  
     console.log('Feedback');
+}
+
+function totalpayoff() {
+    var b;
+    node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
+    
+    W.loadFrame('totalpayoff.html', function() {
+
+        var totalpayoff, playerId, payoffSpan;
+        
+        var payoffs;
+        payoffs = node.game.memory. 
+        
+        for (playerId in node.game.memory.player) {
+            payoffs = node.game.memory.player[playerId].select('offer1').fetch();
+        }
+        
+        payoffSpan = W.getElementById('chosenvalue1');
+        payoffSpan.innerHTML = payoffs;
+
+
+        node.env('auto', function() {
+            node.timer.randomExec(function() {
+                node.game.timer.doTimeUp();
+            });
+        });
+        
+        
+        b = W.getElementById('continue');
+
+        b.onclick = function() {
+            node.done();
+        };
+        
+    });
+    
 }
 
 function postgame() {

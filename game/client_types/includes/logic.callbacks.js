@@ -20,6 +20,7 @@ module.exports = {
     doMatch: doMatch,
     endgame: endgame,
     feedback: feedback,
+    totalpayoff: totalpayoff,
     notEnoughPlayers: notEnoughPlayers
 };
 
@@ -238,6 +239,9 @@ function feedback() {
     });   
 }
 
+function totalpayoff() {
+    //...
+}
 
 function gameover() {
     console.log('************** GAMEOVER ' + gameRoom.name + ' ****************');
