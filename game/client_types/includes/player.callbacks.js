@@ -584,14 +584,13 @@ function totalpayoff() {
         var totalpayoff, playerId, payoffSpan;
         
         var payoffs;
-        payoffs = node.game.memory. 
         
         for (playerId in node.game.memory.player) {
             payoffs = node.game.memory.player[playerId].select('offer1').fetch();
         }
         
         payoffSpan = W.getElementById('chosenvalue1');
-        payoffSpan.innerHTML = payoffs;
+        payoffSpan.innerHTML = payoffs[0];
 
 
         node.env('auto', function() {
