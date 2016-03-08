@@ -240,7 +240,13 @@ function feedback() {
 }
 
 function totalpayoff() {
-    //...
+    var playerId, payoffs;
+    for (playerId in node.game.memory.player) {
+        payoffs = node.game.memory.player[playerId].select('offer1').fetchSubObj(['offer1', 'offer2']);
+        // payoffs is an array of objects like: [{offer1: x, offer2: y}, {offer1: z, offer2, w}];
+        node.say('PAYOFFS', playerId, payoffs);
+    }
+   
 }
 
 function gameover() {

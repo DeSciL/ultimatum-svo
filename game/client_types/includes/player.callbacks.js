@@ -526,7 +526,7 @@ function feedback() {
 
         node.on.data('OTHER_OFFER', function(msg) {
         
-            var chosenSpan1, chosenSpan2, chosen1, chosen2, theofferSpan1, theofferSpan2, offered1, offered2, theofferSpan3, offered3;
+            var chosenSpan1, chosenSpan2, theofferSpan1, theofferSpan2;
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
@@ -540,19 +540,15 @@ function feedback() {
             node.game.timer.startTiming(options);
                         
             
-            //chosen1 = W.getElementById('chosen1');
             chosenSpan1 = W.getElementById('chosenvalue1');
             chosenSpan1.innerHTML = node.game.lastOffer1;
                
-            //chosen2 = W.getElementById('chosen2');
             chosenSpan2 = W.getElementById('chosenvalue2');
             chosenSpan2.innerHTML = node.game.lastOffer2;
             
-            //offered1 = W.getElementById('offered1');
             theofferSpan1 = W.getElementById('theoffer1');
             theofferSpan1.innerHTML = msg.data.offer1;
                
-            //offered2 = W.getElementById('offered2');
             theofferSpan2 = W.getElementById('theoffer2');
             theofferSpan2.innerHTML = msg.data.offer2;
             
@@ -581,30 +577,29 @@ function totalpayoff() {
     
     W.loadFrame('totalpayoff.html', function() {
 
-        var totalpayoff, playerId, payoffSpan;
         
-        var payoffs;
-        
-        for (playerId in node.game.memory.player) {
-            payoffs = node.game.memory.player[playerId].select('offer1').fetch();
-        }
-        
-        payoffSpan = W.getElementById('chosenvalue1');
-        payoffSpan.innerHTML = payoffs[0];
+        node.on.data('PAYOFFS', function(msg) {
+            
+            var payoffs, payoffSpan;
+            payoffs = msg.data.payoffs[0].offer1;
+            
+            payoffSpan = W.getElementById('totalpayoffs');
+            payoffSpan.innerHTML = payoffs;
 
 
-        node.env('auto', function() {
-            node.timer.randomExec(function() {
-                node.game.timer.doTimeUp();
+            node.env('auto', function() {
+                node.timer.randomExec(function() {
+                    node.game.timer.doTimeUp();
+                });
             });
-        });
-        
-        
-        b = W.getElementById('continue');
+            
+            
+            b = W.getElementById('continue');
 
-        b.onclick = function() {
-            node.done();
-        };
+            b.onclick = function() {
+                node.done();
+            };
+        });
         
     });
     
