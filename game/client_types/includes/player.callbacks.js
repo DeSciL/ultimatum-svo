@@ -576,14 +576,13 @@ function totalpayoff() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
     
     W.loadFrame('totalpayoff.html', function() {
-
-        
         node.on.data('PAYOFFS', function(msg) {
             
             var payoffs, payoffSpan;
-            payoffs = msg.data.payoffs[0].offer1;
             
-            payoffSpan = W.getElementById('totalpayoffs');
+            payoffs = msg.data[0].offer1;
+            
+            payoffSpan = W.getElementById('totalpayoff');
             payoffSpan.innerHTML = payoffs;
 
 
