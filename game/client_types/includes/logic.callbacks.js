@@ -239,6 +239,45 @@ function feedback() {
     });   
 }
 
+
+function totalpayoff() {
+    var playerId, payoffs;
+    var i, len, round, other, otherOffer1, otherOffer2;
+    var out;
+    for (playerId in node.game.memory.player) {
+        payoffs = node.game.memory.player[playerId].select('offer1').fetch();
+        i = -1, len = payoffs.length;
+        out = new Array(len);
+        for ( ; ++i < len ; ) {
+            other = payoffs[i].other;
+            round = payoffs[i].stage.round;
+            other = node.game.memory.player[other]
+                .select('offer1')
+                .and('stage.round', '=', round)
+                .last();
+
+            if (!other) {
+                console.log('other not found, put def value');
+                otherOffer1 = 1;
+                otherOffer2 = 1;
+            }
+            else {
+                otherOffer1 = other.offer1;
+                otherOffer2 = other.offer2;
+            }
+
+            out[i] = {
+                myoffer1: payoffs[i].offer1,
+                myoffer2: payoffs[i].offer2,
+                otherOffer1: otherOffer1,
+                otherOffer2: otherOffer2
+            };
+        }
+        node.say('PAYOFFS', playerId, out);
+    }   
+}
+
+/*
 function totalpayoff() {
     var playerId, payoffs;
     for (playerId in node.game.memory.player) {
@@ -248,6 +287,7 @@ function totalpayoff() {
     }
    
 }
+*/
 
 function gameover() {
     console.log('************** GAMEOVER ' + gameRoom.name + ' ****************');

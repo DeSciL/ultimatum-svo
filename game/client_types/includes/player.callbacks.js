@@ -580,7 +580,7 @@ function totalpayoff() {
             
             var payoffs, payoffSpan;
             
-            payoffs = msg.data[0].offer1;
+            payoffs = msg.data[0].otherOffer1;
             
             payoffSpan = W.getElementById('totalpayoff');
             payoffSpan.innerHTML = payoffs;
