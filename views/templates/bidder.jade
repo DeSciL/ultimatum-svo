@@ -3,7 +3,8 @@ extends iframe-layout
 block mainContent
     div(id='container', style='font-size: 20px')
         h2=youAre
-        h3=makeAnOffer
+        h3=makeAnOffer1
+        
         
         // input(type='number', min='0', max='100', name='offer',id='offer')
         // |\n
@@ -14,95 +15,39 @@ block mainContent
         
         table(style='width:500px;height:100px;')
             tr
-                td You receive
-                td 85
-                td 87
-                td 89
-                td 91
-                td 93
-                td 94
-                td 96
-                td 98
-                td 100
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive1
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;', class='firstHoverclass' + index)= val
             tr
-                td
-                td
-                    input(type='radio', name='position', id='pos1', value='1')
-                td
-                    input(type='radio', name='position', id='pos2', value='2')
-                td
-                    input(type='radio', name='position', id='pos3', value='3')
-                td
-                    input(type='radio', name='position', id='pos4', value='4')
-                td
-                    input(type='radio', name='position', id='pos5', value='5')
-                td
-                    input(type='radio', name='position', id='pos6', value='6')
-                td
-                    input(type='radio', name='position', id='pos7', value='7')
-                td
-                    input(type='radio', name='position', id='pos8', value='8')
-                td
-                    input(type='radio', name='position', id='pos9', value='9')
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='firstHoverclass' + i)
+                        input(type='radio', name='position', id='firstPos' + i, value=i++)
             tr
-                td Other player receives
-                td 15
-                td 19
-                td 24
-                td 28
-                td 33
-                td 37
-                td 41
-                td 46
-                td 50
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send1
+                    td(style='font-size:80%;text-align:center;background:#fff;', class='firstHoverclass' + index)= val
         
         br
-        h3=makeAnOffer
-        br
+        h3=makeAnOffer2
+        
         
         table(style='width:500px;height:100px;')
             tr
-                td You receive
-                td 100
-                td 98
-                td 96
-                td 94
-                td 93
-                td 91
-                td 89
-                td 87
-                td 85
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive2
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;', class='secondHoverclass' + index)= val
             tr
-                td
-                td
-                    input(type='radio', name='position2', id='pos11', value='1')
-                td
-                    input(type='radio', name='position2', id='pos12', value='2')
-                td
-                    input(type='radio', name='position2', id='pos13', value='3')
-                td
-                    input(type='radio', name='position2', id='pos14', value='4')
-                td
-                    input(type='radio', name='position2', id='pos15', value='5')
-                td
-                    input(type='radio', name='position2', id='pos16', value='6')
-                td
-                    input(type='radio', name='position2', id='pos17', value='7')
-                td
-                    input(type='radio', name='position2', id='pos18', value='8')
-                td
-                    input(type='radio', name='position2', id='pos19', value='9')
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i)
+                        input(type='radio', name='position2', id='secondPos' + i, value=i++)
             tr
-                td Other player receives
-                td 50
-                td 54
-                td 59
-                td 63
-                td 68
-                td 72
-                td 76
-                td 81
-                td 85
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send2
+                    td(style='font-size:80%;text-align:center;background:#fff;', class='secondHoverclass' + index)= val
 
         br
         input(type='button', value=submit, name='submitOffer', id='submitOffer', class='btn')
