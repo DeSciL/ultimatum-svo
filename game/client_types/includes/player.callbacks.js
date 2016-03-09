@@ -21,8 +21,6 @@ module.exports = {
     notEnoughPlayers: notEnoughPlayers
 };
 
-
-
 function init() {
     var that, waitingForPlayers, treatment, header;
 
@@ -83,8 +81,8 @@ function init() {
 
         root = W.getElementById('container');
         // Leave a space.
-        //W.writeln(' Choice Allocation 1: ' +  offer1 + '. Choice Allocation 2: ' + offer2 +
-        //          '. Waiting for the respondent... ', root);
+        W.writeln(' Choice Allocation 1: ' +  offer1 + '. Choice Allocation 2: ' + offer2 +
+                  '. Waiting for the respondent... ', root);
                   
         // Notify the server.
         node.done({
@@ -352,17 +350,17 @@ function ultimatum() {
             // Start the timer after an offer was received.
             options = {
                 milliseconds: 30000,
-                /*timeup: function() {
+                timeup: function() {
                     node.emit('BID_DONE',
                               Math.floor(Math.random() * 101), other, true);
-                }*/
+                }
             };
 
             node.game.timer.startTiming(options);
 
             b = W.getElementById('submitOffer');
 
-            /*node.env('auto', function() {
+            node.env('auto', function() {
 
                 //////////////////////////////////////////////
                 // nodeGame hint:
@@ -377,22 +375,17 @@ function ultimatum() {
                     node.emit('BID_DONE',
                               Math.floor(Math.random() * 101), other);
                 }, 4000);
-            });*/
+            });
             
-            /*
-            var hover1 = W.getElementsByClassName('hoverclass1');
-            b.onmouseover = function () {
-                hover1.style.background = '#ddd';
-            }
-            */
+            
             
             b.onclick = function() {
           
                 //var position = W.getElementByClassName('position1');
                 
-                for (var i = 0; i < 9; i++) {
+                for (var i = 1; i <= 9; i++) {
                     
-                    var posname = 'firstPos' + i;
+                    var posname = 'pos' + i;
                     var position = W.getElementById(posname);
                     if (position.checked) {
                         var offer1 = position.value;
@@ -401,9 +394,9 @@ function ultimatum() {
                 }
                 
 
-                for (var i = 0; i < 9; i++) {
+                for (var i = 11; i <= 19; i++) {
                     
-                    var posname2 = 'secondPos' + i;
+                    var posname2 = 'pos' + i;
                     var position2 = W.getElementById(posname2);
                     if (position2.checked) {
                         var offer2 = position2.value;
@@ -533,42 +526,31 @@ function feedback() {
 
         node.on.data('OTHER_OFFER', function(msg) {
         
-            var chosenSpan1, chosenSpan2, theofferSpan1, theofferSpan2, thepayoffSpan;
+            var chosenSpan1, chosenSpan2, theofferSpan1, theofferSpan2;
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
             
             
             options = {
-                    /*timeup: function() {
+                    timeup: function() {
                         node.done();
-                    }*/
+                    }
             };
             node.game.timer.startTiming(options);
                         
-            var chosenValueIndex1 = node.game.lastOffer1;
-            var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];            
+            
             chosenSpan1 = W.getElementById('chosenvalue1');
-            chosenSpan1.innerHTML = chosenValue1;
-            
-            var chosenValueIndex2 = node.game.lastOffer2;
-            var chosenValue2 = node.game.settings.receive2[chosenValueIndex2];       
+            chosenSpan1.innerHTML = node.game.lastOffer1;
+               
             chosenSpan2 = W.getElementById('chosenvalue2');
-            chosenSpan2.innerHTML = chosenValue2;
+            chosenSpan2.innerHTML = node.game.lastOffer2;
             
-            var otherValueIndex1 = msg.data.offer1;
-            var otherValue1 = node.game.settings.send1[otherValueIndex1]
             theofferSpan1 = W.getElementById('theoffer1');
-            theofferSpan1.innerHTML = otherValue1;
-            
-            var otherValueIndex2 = msg.data.offer2;  
-            var otherValue2 = node.game.settings.send2[otherValueIndex2]
+            theofferSpan1.innerHTML = msg.data.offer1;
+               
             theofferSpan2 = W.getElementById('theoffer2');
-            theofferSpan2.innerHTML = otherValue2;
-            
-            var roundpayoff = chosenValue1 + chosenValue2 + otherValue1 + otherValue2;  
-            thepayoffSpan = W.getElementById('thepayoff');
-            thepayoffSpan.innerHTML = roundpayoff;
+            theofferSpan2.innerHTML = msg.data.offer2;
             
             root = W.getElementById('container');
 
@@ -596,33 +578,12 @@ function totalpayoff() {
     W.loadFrame('totalpayoff.html', function() {
         node.on.data('PAYOFFS', function(msg) {
             
-            var payoffs, payoffSpan, payoffSum, realPayoff, realPayoffSpan;
+            var payoffs, payoffSpan;
             
-            payoffs = msg.data;
-            payoffSum = 0;
+            payoffs = msg.data[0].otherOffer1;
             
-            var i;
-           
-          
-            for(i = 0; i < payoffs.length; ++i) {
-                var myIndex = parseInt(payoffs[i].myoffer1);
-                payoffSum += node.game.settings.receive1[myIndex];
-                var myIndex2 = parseInt(payoffs[i].myoffer2);
-                payoffSum += node.game.settings.receive2[myIndex2];
-                var otherIndex = parseInt(payoffs[i].otherOffer1);
-                payoffSum += node.game.settings.send1[otherIndex];
-                var otherIndex2 = parseInt(payoffs[i].otherOffer2);
-                payoffSum += node.game.settings.send2[otherIndex2];
-            }
-           
-          
             payoffSpan = W.getElementById('totalpayoff');
-            payoffSpan.innerHTML = payoffSum;
-            
-            realPayoff = payoffSum / node.game.settings.EXCHANGE_RATE;
-            var realPayoffRounded = parseFloat(realPayoff).toFixed(2);
-            realPayoffSpan = W.getElementById('realpayoffSpan');
-            realPayoffSpan.innerHTML = realPayoffRounded;
+            payoffSpan.innerHTML = payoffs;
 
 
             node.env('auto', function() {

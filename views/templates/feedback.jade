@@ -3,7 +3,8 @@ extends iframe-layout
 block mainContent
     div(id='container', style='font-size: 20px')
         h2=feedback
-        h3=choices1
+        h3=choices
+        p=payoff
         
         
         div(id='chosen1')
@@ -17,9 +18,6 @@ block mainContent
             span(id='chosenvalue2')
             |.</br>
         
-        br    
-        h3=choices2
-        
         
         div(id='offered1')
             =youReceivedAnOffer1
@@ -32,10 +30,7 @@ block mainContent
             span(id='theoffer2')
             |.</br>
             
-        br
-        p=payoff
-            span(id='thepayoff')|.
-        br
+        
         
         input(type='button', value=submit, name='continue', id='continue', class='btn')
-        
+        br
