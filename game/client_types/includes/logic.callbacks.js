@@ -336,6 +336,9 @@ function doMatch() {
         console.log('==================== LOGIC: BIDDER is', bidder.id, 
                     '; RESPONDENT IS', respondent.id);
     
+        console.log(node.game.pl.size());
+        console.log(node.nodename);
+
         node.say('BIDDER', bidder.id, data_b);
         node.say('BIDDER', respondent.id, data_r);
         //node.say('RESPONDENT', respondent.id, data_r);

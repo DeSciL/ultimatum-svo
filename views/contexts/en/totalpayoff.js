@@ -4,7 +4,8 @@ module.exports = function(settings, headers) {
     return {
         "title": "Total Payoff",
         "totalpayoff": "Total Payoff",
-        "payoff": "Your total payoff is:::: " + coins + ".",
+        "payoff": "Your total payoff: ",
+        "realpayoff": "This equals a bonus of: ",
         "submit": "Continue"
     };
 };

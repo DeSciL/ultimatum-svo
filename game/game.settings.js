@@ -15,13 +15,22 @@ module.exports = {
     MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. *
-    REPEAT: 2,
+    REPEAT: 10,
 
     // Number of coins to split. *
     COINS: 100,
 
     // Divider ECU / DOLLARS *
     EXCHANGE_RATE: 4000,
+
+
+    // Values
+    receive1: [85, 87, 89, 91, 93, 94, 96, 98, 100],
+    send1: [15, 19, 24, 28, 33, 37, 41, 46, 50],
+
+    receive2: [100, 98, 96, 94, 93, 91, 89, 87, 85],
+    send2: [50, 54, 59, 63, 68, 72, 76, 81, 86],
+
 
     EXCHANGE_RATE_INSTRUCTIONS: 0.01,
 

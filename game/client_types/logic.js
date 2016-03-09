@@ -31,6 +31,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Increment counter.
     counter = counter ? ++counter : settings.SESSION_ID;
 
+
+    //delete require.cache[require.resolve(__dirname + '/includes/logic.callbacks.js')]
+
     // Import other functions used in the game.
     // Some objects are shared.
     var cbs = channel.require(__dirname + '/includes/logic.callbacks.js', {
